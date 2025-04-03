@@ -11,7 +11,9 @@ export default function Home() {
 
   async function loadStudentList() {
     try {
-      const { data, error } = await supabase.from("Student").select();
+      const { data, error } = await supabase
+        .from("Student")
+        .select("USN, Gender, Address");
 
       if (error) {
         console.error("Supabase Error:", error);
@@ -38,7 +40,9 @@ export default function Home() {
               key={index}
               className="bg-white shadow-lg rounded-lg p-4 text-center border border-gray-200"
             >
-              <p className="text-lg font-semibold">{student.Name}</p>
+              <p className="text-lg font-semibold">USN: {student.USN}</p>
+              <p className="text-gray-700">Gender: {student.Gender}</p>
+              <p className="text-gray-700">Address: {student.Address}</p>
             </div>
           ))}
         </div>
